@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EchoBox.App/EchoBox.App.csproj" />
+  <Project Path="EchoBox.Core/EchoBox.Core.csproj" />
+  <Project Path="EchoBox.Engine/EchoBox.Engine.csproj" />
+  <Project Path="EchoBox.ShellExtension/EchoBox.ShellExtension.csproj" />
+</Solution>

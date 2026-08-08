@@ -1,0 +1,22 @@
+{
+  "servers": {
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "windows-mcp": {
+      "type": "stdio",
+      "command": "C:\\Users\\foxyb\\.mcp\\tools\\windows-mcp\\Sbroenne.WindowsMcp.exe"
+    }
+  },
+  "mcpServers": {
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "windows-mcp": {
+      "type": "stdio",
+      "command": "C:\\Users\\foxyb\\.mcp\\tools\\windows-mcp\\Sbroenne.WindowsMcp.exe"
+    }
+  }
+}

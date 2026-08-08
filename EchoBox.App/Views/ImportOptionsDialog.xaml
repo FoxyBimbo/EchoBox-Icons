@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="EchoBox.App.Views.ImportOptionsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:EchoBox.Core.Models"
+    xmlns:views="using:EchoBox.App.Views"
+    mc:Ignorable="d"
+    Title="Import Options"
+    PrimaryButtonText="Import"
+    CloseButtonText="Cancel"
+    DefaultButton="Primary"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <Grid x:Name="MainContentGrid" Width="500" MaxHeight="520" RowDefinitions="Auto,Auto,Auto,Auto,*">
+
+        <!-- Category Dropdown and New Category Button -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="8" Margin="0,0,0,12">
+            <DropDownButton x:Name="CategoryDropDownButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <DropDownButton.Content>
+                    <TextBlock x:Name="SelectedCategoriesTextBlock" Text="Select Categories..." TextTrimming="CharacterEllipsis" />
+                </DropDownButton.Content>
+                <DropDownButton.Flyout>
+                    <Flyout x:Name="CategoryFlyout">
+                        <StackPanel Width="220" Spacing="8">
+                            <TextBlock Text="Categories" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <ScrollViewer MaxHeight="180" VerticalScrollBarVisibility="Auto">
+                                <ItemsControl x:Name="CategoriesItemsControl">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="models:CategorySelectionItem">
+                                            <CheckBox Content="{x:Bind Category.Name, Mode=OneTime}"
+                                                      IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                                      Margin="0,2,0,2" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Flyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+
+            <Button Grid.Column="1" x:Name="NewCategoryButton" ToolTipService.ToolTip="New Category" Click="NewCategoryButton_Click" Padding="8,6" VerticalAlignment="Center">
+                <Button.Flyout>
+                    <Flyout x:Name="NewCategoryFlyout">
+                        <StackPanel Width="200" Spacing="8">
+                            <TextBlock Text="New Category Name" Style="{StaticResource CaptionTextBlockStyle}" />
+                            <TextBox x:Name="NewCategoryNameTextBox" PlaceholderText="Category Name..." />
+                            <Button Content="Add &amp; Select" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Click="AddCategoryConfirm_Click" />
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+                <FontIcon Glyph="&#xE710;" FontSize="14" />
+            </Button>
+        </Grid>
+
+        <!-- Folder Option: Scan Sub-Folders CheckBox -->
+        <CheckBox Grid.Row="1" x:Name="ScanSubFoldersCheckBox"
+                  Content="Scan Sub-Folders"
+                  IsChecked="True"
+                  Checked="ScanSubFoldersCheckBox_CheckedChanged"
+                  Unchecked="ScanSubFoldersCheckBox_CheckedChanged"
+                  Visibility="Collapsed"
+                  Margin="0,0,0,12" />
+
+        <!-- Selected Items Summary Header -->
+        <TextBlock Grid.Row="2" x:Name="ItemsSummaryHeaderTextBlock"
+                   Text="Selected Items"
+                   Style="{StaticResource BodyStrongTextBlockStyle}"
+                   Margin="0,4,0,8" />
+
+        <TextBlock Grid.Row="3" x:Name="FolderLocationTextBlock"
+                   Text=""
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                   TextTrimming="CharacterEllipsis"
+                   Visibility="Collapsed"
+                   Margin="0,0,0,8" />
+
+        <!-- Items List -->
+        <Border Grid.Row="4" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1" CornerRadius="8" Padding="4">
+            <ListView x:Name="FilesListView" Height="220" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="views:ImportProgressItem">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" Margin="4,2">
+                            <FontIcon Grid.Column="0"
+                                      Glyph="{x:Bind StatusGlyph, Mode=OneWay}"
+                                      Foreground="{x:Bind StatusForegroundBrush, Mode=OneWay}"
+                                      FontSize="14"
+                                      VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{x:Bind DisplayName, Mode=OneTime}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+    </Grid>
+</ContentDialog>

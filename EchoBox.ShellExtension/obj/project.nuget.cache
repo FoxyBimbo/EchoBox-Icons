@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "BvAjDdfOS9Q=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\foxyb\\Documents\\GitHub\\EchoBox-Icons\\EchoBox.ShellExtension\\EchoBox.ShellExtension.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\foxyb\\.nuget\\packages\\sixlabors.imagesharp\\3.1.7\\sixlabors.imagesharp.3.1.7.nupkg.sha512",
+    "C:\\Users\\foxyb\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
+  ],
+  "logs": []
+}

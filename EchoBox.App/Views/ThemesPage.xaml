@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="EchoBox.App.Views.ThemesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Padding="12,8,12,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="LayoutVisualStateGroup">
+                    <VisualState x:Name="WideState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1000" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MainStackPanel.(Grid.Column)" Value="1" />
+                            <Setter Target="MainStackPanel.(Grid.ColumnSpan)" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="NarrowState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MainStackPanel.(Grid.Column)" Value="0" />
+                            <Setter Target="MainStackPanel.(Grid.ColumnSpan)" Value="3" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <StackPanel x:Name="MainStackPanel" Grid.Column="1" Grid.ColumnSpan="1" Spacing="24" HorizontalAlignment="Stretch">
+
+                <!-- Page Header -->
+                <StackPanel Spacing="4" Margin="0,4,0,8">
+                    <TextBlock Text="Themes &amp; Appearance" Style="{StaticResource SubtitleTextBlockStyle}" />
+                </StackPanel>
+
+                <!-- 1. Theme Mode Card -->
+                <Expander Header="Theme Mode" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <StackPanel Spacing="12" Padding="16">
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Grid.Column="0" Text="System Theme Mode" FontWeight="Bold" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="16">
+                                <RadioButton x:Name="SystemLightRadio" Content="Light" GroupName="SystemTheme" Checked="SystemTheme_Checked" />
+                                <RadioButton x:Name="SystemDarkRadio" Content="Dark" GroupName="SystemTheme" Checked="SystemTheme_Checked" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Grid.Column="0" Text="Apps Theme Mode" FontWeight="Bold" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="16">
+                                <RadioButton x:Name="AppsLightRadio" Content="Light" GroupName="AppsTheme" Checked="AppsTheme_Checked" />
+                                <RadioButton x:Name="AppsDarkRadio" Content="Dark" GroupName="AppsTheme" Checked="AppsTheme_Checked" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+
+                <!-- 2. Accent Color Card -->
+                <Expander Header="Accent Color" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <StackPanel Spacing="16" Padding="16">
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Grid.Column="0" Text="Current Accent Color" FontWeight="Bold" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <Border x:Name="AccentColorPreview" Width="36" Height="36" CornerRadius="6" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" />
+                                <TextBlock x:Name="AccentColorHexText" Text="#0078D7" VerticalAlignment="Center" FontFamily="Consolas" FontWeight="SemiBold" />
+
+                                <!-- Color Wheel Popup Flyout -->
+                                <Button Content="Color Wheel Picker" Style="{StaticResource AccentButtonStyle}">
+                                    <Button.Flyout>
+                                        <Flyout x:Name="AccentColorFlyout">
+                                            <StackPanel Width="300" Spacing="12" Padding="4">
+                                                <TextBlock Text="Select Accent Color" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                                <ColorPicker x:Name="AccentColorPicker"
+                                                             ColorSpectrumShape="Ring"
+                                                             IsColorSpectrumVisible="True"
+                                                             IsColorSliderVisible="True"
+                                                             IsColorPreviewVisible="True"
+                                                             IsHexInputVisible="True"
+                                                             IsAlphaSliderVisible="False"
+                                                             ColorChanged="AccentColorPicker_ColorChanged" />
+                                                <Button Content="Apply Accent Color" HorizontalAlignment="Stretch" Style="{StaticResource AccentButtonStyle}" Click="ApplyAccentColor_Click" />
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+
+                        <!-- Quick Palette -->
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Quick Palette" FontWeight="SemiBold" Style="{StaticResource CaptionTextBlockStyle}" />
+                            <ItemsControl x:Name="QuickPaletteItemsControl">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="8" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+
+                <!-- 3. Desktop Backgrounds Card -->
+                <Expander Header="Desktop Backgrounds" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <StackPanel Spacing="16" Padding="16">
+                        
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Background Mode" FontWeight="Bold" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,4,0,0">
+                                <RadioButton x:Name="ModeSingleImageRadio" Content="Single Image" GroupName="BgMode" Checked="BgMode_Checked" />
+                                <RadioButton x:Name="ModeFolderRadio" Content="Folder Slideshow" GroupName="BgMode" Checked="BgMode_Checked" />
+                                <RadioButton x:Name="ModeSolidRadio" Content="Solid Color" GroupName="BgMode" Checked="BgMode_Checked" />
+                                <RadioButton x:Name="ModeGradientRadio" Content="Gradient Colors" GroupName="BgMode" Checked="BgMode_Checked" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Single Image Options Panel -->
+                        <StackPanel x:Name="SingleImagePanel" Spacing="12" Visibility="Collapsed">
+                            <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Button Content="Browse Image File..." Click="BrowseSingleImage_Click" Style="{StaticResource AccentButtonStyle}" />
+                                <TextBlock x:Name="SingleImagePathText" Text="No file selected" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxWidth="1000" />
+                            </StackPanel>
+                            <Border x:Name="SingleImagePreviewBorder" Width="240" Height="135" CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource LayerFillColorDefaultBrush}" HorizontalAlignment="Left">
+                                <Image x:Name="SingleImagePreview" Stretch="UniformToFill" />
+                            </Border>
+                            <Button Content="Apply Image Wallpaper" Click="ApplySingleImage_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <!-- Folder Slideshow Panel -->
+                        <StackPanel x:Name="FolderPanel" Spacing="12" Visibility="Collapsed">
+                            <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Button Content="Browse Folder..." Click="BrowseFolder_Click" Style="{StaticResource AccentButtonStyle}" />
+                                <TextBlock x:Name="FolderPathText" Text="No folder selected" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextTrimming="CharacterEllipsis" MaxWidth="1000" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="24">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Change Picture Every:" Style="{StaticResource CaptionTextBlockStyle}" />
+                                    <ComboBox x:Name="SlideshowIntervalComboBox" SelectedIndex="3" SelectionChanged="SlideshowIntervalComboBox_SelectionChanged">
+                                        <ComboBoxItem Content="1 Minute" Tag="1" />
+                                        <ComboBoxItem Content="5 Minutes" Tag="5" />
+                                        <ComboBoxItem Content="10 Minutes" Tag="10" />
+                                        <ComboBoxItem Content="30 Minutes" Tag="30" />
+                                        <ComboBoxItem Content="1 Hour" Tag="60" />
+                                        <ComboBoxItem Content="1 Day" Tag="1440" />
+                                    </ComboBox>
+                                </StackPanel>
+                                <CheckBox x:Name="SlideshowShuffleCheckBox" Content="Shuffle / Randomize" VerticalAlignment="Bottom" Checked="SlideshowShuffleCheckBox_CheckedChanged" Unchecked="SlideshowShuffleCheckBox_CheckedChanged" />
+                            </StackPanel>
+                            <Button Content="Apply Slideshow Wallpaper" Click="ApplySlideshow_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <!-- Solid Color Panel -->
+                        <StackPanel x:Name="SolidColorPanel" Spacing="12" Visibility="Collapsed">
+                            <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <Border x:Name="SolidColorPreview" Width="48" Height="48" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" />
+                                <TextBlock x:Name="SolidColorHexText" Text="#0078D7" VerticalAlignment="Center" FontFamily="Consolas" FontWeight="SemiBold" />
+
+                                <Button Content="Color Wheel Picker">
+                                    <Button.Flyout>
+                                        <Flyout x:Name="SolidColorFlyout">
+                                            <StackPanel Width="300" Spacing="12" Padding="4">
+                                                <TextBlock Text="Select Solid Background Color" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                                <ColorPicker x:Name="SolidColorPicker"
+                                                             ColorSpectrumShape="Ring"
+                                                             IsColorSpectrumVisible="True"
+                                                             IsColorSliderVisible="True"
+                                                             IsColorPreviewVisible="True"
+                                                             IsHexInputVisible="True"
+                                                             IsAlphaSliderVisible="False"
+                                                             ColorChanged="SolidColorPicker_ColorChanged" />
+                                                <Button Content="Apply Solid Color" HorizontalAlignment="Stretch" Style="{StaticResource AccentButtonStyle}" Click="ApplySolidColor_Click" />
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
+                            </StackPanel>
+                            <Button Content="Set Solid Color Wallpaper" Click="ApplySolidColor_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <!-- Gradient Options Builder Panel -->
+                        <StackPanel x:Name="GradientPanel" Spacing="16" Visibility="Collapsed">
+                            <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+
+                            <!-- Step 1: Color Count -->
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="1. Number of Gradient Colors (2 to 4):" FontWeight="SemiBold" />
+                                <StackPanel Orientation="Horizontal" Spacing="16">
+                                    <RadioButton x:Name="GradientStops2Radio" Content="2 Colors" GroupName="StopsCount" Checked="GradientStopsCount_Checked" />
+                                    <RadioButton x:Name="GradientStops3Radio" Content="3 Colors" GroupName="StopsCount" IsChecked="True" Checked="GradientStopsCount_Checked" />
+                                    <RadioButton x:Name="GradientStops4Radio" Content="4 Colors" GroupName="StopsCount" Checked="GradientStopsCount_Checked" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Step 2: Individual Colors & Reorderable Cards -->
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="2. Select &amp; Rearrange Colors:" FontWeight="SemiBold" />
+
+                                <ListView x:Name="GradientStopsListView"
+                                          CanReorderItems="True"
+                                          AllowDrop="True"
+                                          SelectionMode="None"
+                                          DragItemsCompleted="GradientStopsListView_DragItemsCompleted">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="12" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="160" Padding="12" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                                                <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding Label}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+                                                    
+                                                    <!-- Color Swatch & Edit -->
+                                                    <Button HorizontalAlignment="Stretch" Padding="4">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                                                <Border Width="24" Height="24" CornerRadius="4" Background="{Binding ColorBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" />
+                                                                <TextBlock Text="{Binding HexCode}" VerticalAlignment="Center" FontFamily="Consolas" FontSize="12" />
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                        <Button.Flyout>
+                                                            <Flyout>
+                                                                <StackPanel Width="280" Spacing="12" Padding="4">
+                                                                    <TextBlock Text="Choose Stop Color" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                                                    <ColorPicker Color="{Binding Color, Mode=TwoWay}"
+                                                                                 ColorSpectrumShape="Ring"
+                                                                                 IsColorSpectrumVisible="True"
+                                                                                 IsColorSliderVisible="True"
+                                                                                 IsColorPreviewVisible="True"
+                                                                                 IsHexInputVisible="True"
+                                                                                 IsAlphaSliderVisible="False"
+                                                                                 ColorChanged="StopColorPicker_ColorChanged" />
+                                                                </StackPanel>
+                                                            </Flyout>
+                                                        </Button.Flyout>
+                                                    </Button>
+
+                                                    <!-- Reorder Buttons -->
+                                                    <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+                                                        <Button Content="◀" Width="40" Height="28" Padding="0" Click="MoveStopLeft_Click" ToolTipService.ToolTip="Move Left" Tag="{Binding}" />
+                                                        <Button Content="▶" Width="40" Height="28" Padding="0" Click="MoveStopRight_Click" ToolTipService.ToolTip="Move Right" Tag="{Binding}" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+
+                            <!-- Step 3: Gradient Direction / Angle -->
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="3. Gradient Direction &amp; Angle:" FontWeight="SemiBold" />
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Button Content="Top to Bottom (90°)" Click="SetAngle_Click" Tag="90" />
+                                    <Button Content="Left to Right (0°)" Click="SetAngle_Click" Tag="0" />
+                                    <Button Content="Diagonal (45°)" Click="SetAngle_Click" Tag="45" />
+                                    <Button Content="Anti-Diagonal (135°)" Click="SetAngle_Click" Tag="135" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <Slider x:Name="AngleSlider" Minimum="0" Maximum="360" Value="90" Width="300" ValueChanged="AngleSlider_ValueChanged" />
+                                    <TextBlock x:Name="AngleText" Text="90°" VerticalAlignment="Center" FontWeight="SemiBold" Width="50" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Step 4: Live Preview Box -->
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="4. Live Preview Box:" FontWeight="SemiBold" />
+                                <Border x:Name="GradientPreviewBorder" Width="400" Height="225" CornerRadius="12" BorderThickness="2" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Left">
+                                    <Grid>
+                                        <TextBlock x:Name="ResolutionText" Text="Desktop Resolution: 1920 x 1080" Margin="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#E0FFFFFF" FontSize="11" FontWeight="SemiBold" />
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Step 5: Save & Set Gradient -->
+                            <StackPanel Spacing="12">
+                                <Button Content="Save &amp; Set Gradient Background" Click="SaveAndSetGradient_Click" Style="{StaticResource AccentButtonStyle}" Padding="16,8" HorizontalAlignment="Left" />
+                            </StackPanel>
+
+                            <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" Margin="0,12" />
+
+                            <!-- Saved Gradients Gallery -->
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Saved Gradients Gallery" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl x:Name="SavedGradientsItemsControl">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Spacing="12" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

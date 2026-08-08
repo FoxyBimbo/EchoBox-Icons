@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Register Context Menu": {
+      "commandName": "Project",
+      "commandLineArgs": "--register"
+    },
+    "Unregister Context Menu": {
+      "commandName": "Project",
+      "commandLineArgs": "--unregister"
+    },
+    "Apply Folder Test": {
+      "commandName": "Project",
+      "commandLineArgs": "--apply-folder \"$(SolutionDir)\""
+    }
+  }
+}

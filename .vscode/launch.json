@@ -1,0 +1,57 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run EchoBox - Icons (App)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build App (WinUI 3)",
+      "program": "${workspaceFolder}/EchoBox.App/bin/Debug/net8.0-windows10.0.19041.0/win-x64/EchoBox.App.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/EchoBox.App",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Debug EchoBox - Icons (App)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build App (WinUI 3)",
+      "program": "${workspaceFolder}/EchoBox.App/bin/Debug/net8.0-windows10.0.19041.0/win-x64/EchoBox.App.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/EchoBox.App",
+      "stopAtEntry": false,
+      "enableStepFiltering": true
+    },
+    {
+      "name": "Debug ShellExtension CLI (--register)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build ShellExtension",
+      "program": "${workspaceFolder}/EchoBox.ShellExtension/bin/Debug/net8.0-windows10.0.19041.0/EchoBox.ShellExtension.exe",
+      "args": ["--register"],
+      "cwd": "${workspaceFolder}/EchoBox.ShellExtension",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Debug ShellExtension CLI (--unregister)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build ShellExtension",
+      "program": "${workspaceFolder}/EchoBox.ShellExtension/bin/Debug/net8.0-windows10.0.19041.0/EchoBox.ShellExtension.exe",
+      "args": ["--unregister"],
+      "cwd": "${workspaceFolder}/EchoBox.ShellExtension",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Debug ShellExtension CLI (--apply-folder)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build ShellExtension",
+      "program": "${workspaceFolder}/EchoBox.ShellExtension/bin/Debug/net8.0-windows10.0.19041.0/EchoBox.ShellExtension.exe",
+      "args": ["--apply-folder", "${workspaceFolder}"],
+      "cwd": "${workspaceFolder}/EchoBox.ShellExtension",
+      "stopAtEntry": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\bin\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.deps.json
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\bin\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\bin\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.pdb
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\bin\Debug\net8.0-windows10.0.19041.0\EchoBox.Core.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\bin\Debug\net8.0-windows10.0.19041.0\EchoBox.Core.pdb
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.csproj.AssemblyReference.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.AssemblyInfoInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.AssemblyInfo.cs
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.csproj.CoreCompileInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.sourcelink.json
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox..53BDF920.Up2Date
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\refint\EchoBox.Engine.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\EchoBox.Engine.pdb
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0-windows10.0.19041.0\ref\EchoBox.Engine.dll

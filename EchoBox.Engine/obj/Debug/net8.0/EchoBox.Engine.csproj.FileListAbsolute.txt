@@ -1,0 +1,6 @@
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.csproj.AssemblyReference.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.AssemblyInfoInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.AssemblyInfo.cs
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.csproj.CoreCompileInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Engine\obj\Debug\net8.0\EchoBox.Engine.sourcelink.json

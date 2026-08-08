@@ -1,0 +1,12 @@
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\bin\x64\Debug\net8.0\EchoBox.Core.deps.json
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\bin\x64\Debug\net8.0\EchoBox.Core.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\bin\x64\Debug\net8.0\EchoBox.Core.pdb
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.AssemblyInfoInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.AssemblyInfo.cs
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.csproj.CoreCompileInputs.cache
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.sourcelink.json
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\refint\EchoBox.Core.dll
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\EchoBox.Core.pdb
+C:\Users\foxyb\Documents\GitHub\EchoBox-Icons\EchoBox.Core\obj\x64\Debug\net8.0\ref\EchoBox.Core.dll

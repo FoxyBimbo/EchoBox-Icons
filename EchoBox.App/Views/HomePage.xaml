@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="EchoBox.App.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:EchoBox.App.Helpers"
+    xmlns:models="using:EchoBox.Core.Models"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <helpers:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+        <helpers:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+
+        <DataTemplate x:Key="IconMappingItemTemplate" x:DataType="models:IconMapping">
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,12" HorizontalAlignment="Stretch">
+                <Grid ColumnDefinitions="2.5*,3*,Auto" ColumnSpacing="16" VerticalAlignment="Center">
+                    
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="4">
+                        <!-- Built-in mapping view -->
+                        <StackPanel Visibility="{Binding IsCustom, Converter={StaticResource InverseBoolToVisibilityConverter}}" Spacing="2">
+                            <TextBlock Text="{Binding TargetName}" FontWeight="Bold" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock Text="{Binding FileExtension}" Visibility="{Binding FileExtension, Converter={StaticResource StringToVisibilityConverter}}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{StaticResource CaptionTextBlockStyle}" />
+                        </StackPanel>
+
+                        <!-- Custom mapping editable view -->
+                        <StackPanel Visibility="{Binding IsCustom, Converter={StaticResource BoolToVisibilityConverter}}" Spacing="4">
+                            <TextBlock Text="Icon Type" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <TextBox Text="{Binding TargetName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="e.g. .mp3;.m4a or Discord;Steam" />
+                        </StackPanel>
+
+                        <Border Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" Visibility="{Binding IsSingleIconOnly, Converter={StaticResource BoolToVisibilityConverter}}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,4,0,0">
+                            <TextBlock Text="Single Icon Only" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorAttentionBrush}" />
+                        </Border>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding SelectedIconPaths}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="6" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Padding="4">
+                                        <Image Width="32" Height="32" Source="{Binding}" ToolTipService.ToolTip="{Binding}" />
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <Button Content="Pick Icons" Click="PickIconsButton_Click" Tag="{Binding}" />
+                        <Button Content="Clear" Click="ClearIconsButton_Click" Tag="{Binding}" />
+                        <Button Click="DeleteCustomMapping_Click" Tag="{Binding}" ToolTipService.ToolTip="Delete custom mapping" Visibility="{Binding IsCustom, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <FontIcon Glyph="&#xE74D;" FontSize="14" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Padding="12,8,12,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="LayoutVisualStateGroup">
+                    <VisualState x:Name="WideState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1000" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MainStackPanel.(Grid.Column)" Value="1" />
+                            <Setter Target="MainStackPanel.(Grid.ColumnSpan)" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="NarrowState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="MainStackPanel.(Grid.Column)" Value="0" />
+                            <Setter Target="MainStackPanel.(Grid.ColumnSpan)" Value="3" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <StackPanel x:Name="MainStackPanel" Grid.Column="1" Grid.ColumnSpan="1" Spacing="24" HorizontalAlignment="Stretch">
+                
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Home - Icon Mapping &amp; Profiles" Style="{StaticResource SubtitleTextBlockStyle}" />
+                </StackPanel>
+
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Padding="16">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Profiles" FontWeight="SemiBold" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto" ColumnSpacing="8">
+                            <ComboBox x:Name="ProfileComboBox" Grid.Column="0" HorizontalAlignment="Stretch" DisplayMemberPath="Name" SelectionChanged="ProfileComboBox_SelectionChanged" />
+                            <Button x:Name="RenameProfileButton" Grid.Column="1" Click="RenameProfileButton_Click" ToolTipService.ToolTip="Rename profile">
+                                <FontIcon Glyph="&#xE70F;" FontSize="14" />
+                            </Button>
+                            <Button x:Name="DeleteProfileButton" Grid.Column="2" Click="DeleteProfileButton_Click" ToolTipService.ToolTip="Delete profile">
+                                <FontIcon Glyph="&#xE74D;" FontSize="14" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                            </Button>
+                            <Button x:Name="ExportProfileButton" Grid.Column="3" Click="ExportProfileButton_Click" ToolTipService.ToolTip="Export profile to zip archive">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <FontIcon Glyph="&#xE8B8;" FontSize="14" />
+                                    <TextBlock Text="Export" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ImportProfileButton" Grid.Column="4" Click="ImportProfileButton_Click" ToolTipService.ToolTip="Import profile from zip archive">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <FontIcon Glyph="&#xE8B6;" FontSize="14" />
+                                    <TextBlock Text="Import" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Padding="16">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Target Scope" FontWeight="SemiBold" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <ComboBox x:Name="TargetScopeComboBox" HorizontalAlignment="Stretch" SelectionChanged="TargetScopeComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Apply across computer drive (C:\)" Tag="FullDrive" />
+                            <ComboBoxItem Content="Apply to specific folder" Tag="SpecificFolder" />
+                            <ComboBoxItem Content="Only Apply System Icons" Tag="SystemIconsOnly" />
+                        </ComboBox>
+
+                        <Grid x:Name="SpecificFolderPanel" ColumnDefinitions="*,Auto" ColumnSpacing="8" Visibility="Collapsed">
+                            <TextBox x:Name="TargetFolderTextBox" PlaceholderText="Select target folder path..." TextChanged="TargetFolderTextBox_TextChanged" />
+                            <Button x:Name="BrowseFolderButton" Grid.Column="1" Content="Browse..." Click="BrowseFolderButton_Click" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Grid.Column="0" Text="Icon Target Mappings" Style="{StaticResource SubtitleTextBlockStyle}" VerticalAlignment="Center" />
+                    <Button x:Name="ApplyIconsButton" Grid.Column="1" Content="Apply Icons Now" Style="{StaticResource AccentButtonStyle}" Padding="24,8" Click="ApplyIconsButton_Click" />
+                </Grid>
+
+                <!-- 1. System Icons Section -->
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE770;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                        <TextBlock Text="System Icons" Style="{StaticResource BodyStrongTextBlockStyle}" FontWeight="Bold" FontSize="16" />
+                    </StackPanel>
+                    <ListView x:Name="SystemMappingsListView" SelectionMode="None" ItemTemplate="{StaticResource IconMappingItemTemplate}" />
+                </StackPanel>
+
+                <!-- 2. File Extension Icons Section -->
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE8A5;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                        <TextBlock Text="File Extension Icons" Style="{StaticResource BodyStrongTextBlockStyle}" FontWeight="Bold" FontSize="16" />
+                    </StackPanel>
+                    <ListView x:Name="FileExtensionMappingsListView" SelectionMode="None" ItemTemplate="{StaticResource IconMappingItemTemplate}" />
+                </StackPanel>
+
+                <!-- 3. Custom Icons Section -->
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE8B7;" FontSize="18" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Custom Icons" Style="{StaticResource BodyStrongTextBlockStyle}" FontWeight="Bold" FontSize="16" />
+                    </StackPanel>
+                    
+                    <ListView x:Name="CustomMappingsListView" SelectionMode="None" ItemTemplate="{StaticResource IconMappingItemTemplate}" />
+                    
+                    <TextBlock x:Name="NoCustomMappingsTextBlock" Text="No custom icon mappings created yet." Foreground="{ThemeResource TextFillColorTertiaryBrush}" Style="{StaticResource CaptionTextBlockStyle}" Visibility="Collapsed" Margin="4,0,0,4" />
+
+                    <Button x:Name="AddCustomMappingButton" Click="AddCustomMappingButton_Click" HorizontalAlignment="Stretch" Padding="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                            <FontIcon Glyph="&#xE710;" FontSize="16" />
+                            <TextBlock Text="Add Custom Icon Mapping" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
+

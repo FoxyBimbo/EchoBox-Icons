@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="EchoBox.App.Views.ApplyProgressDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Applying Icons..."
+    CloseButtonText="Cancel">
+
+    <StackPanel Width="420" Spacing="16">
+        <TextBlock x:Name="StatusTextBlock" Text="Preparing filesystem scanner and icon applier..." TextWrapping="Wrap" />
+
+        <ProgressBar x:Name="IndeterminateProgressBar" IsIndeterminate="True" Height="10" HorizontalAlignment="Stretch" />
+
+        <StackPanel Spacing="4">
+            <TextBlock x:Name="ScannedCountTextBlock" Text="Scanned items: 0" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <TextBlock x:Name="UpdatedCountTextBlock" Text="Updated icons: 0" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <TextBlock x:Name="CurrentPathTextBlock" Text="Path: -" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

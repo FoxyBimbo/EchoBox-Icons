@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="EchoBox.App.Views.ManageCategoriesDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:EchoBox.Core.Models"
+    mc:Ignorable="d"
+    Title="Edit Categories"
+    CloseButtonText="Close"
+    DefaultButton="Close">
+
+    <Grid Width="420" RowDefinitions="*,Auto" RowSpacing="16">
+        <ListView x:Name="CategoriesListView"
+                  Grid.Row="0"
+                  MaxHeight="240"
+                  SelectionMode="Single"
+                  SelectionChanged="CategoriesListView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:IconCategory">
+                    <Grid ColumnDefinitions="*,Auto" Padding="4,4" HorizontalAlignment="Stretch">
+                        <TextBlock Grid.Column="0"
+                                   Text="{x:Bind Name}"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource BodyTextBlockStyle}" />
+                        <Button Grid.Column="1"
+                                Padding="8,4"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                ToolTipService.ToolTip="Delete Category"
+                                Click="DeleteCategoryButton_Click"
+                                Tag="{x:Bind}">
+                            <FontIcon Glyph="&#xE74D;" FontSize="14" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <TextBox x:Name="CategoryNameTextBox"
+                     Grid.Column="0"
+                     PlaceholderText="Category name..."
+                     TextChanged="CategoryNameTextBox_TextChanged"
+                     VerticalAlignment="Center" />
+            <Button x:Name="ActionButton"
+                    Grid.Column="1"
+                    Content="Add Category"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Click="ActionButton_Click"
+                    VerticalAlignment="Center" />
+        </Grid>
+    </Grid>
+</ContentDialog>

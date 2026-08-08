@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "EchoBox.App (Unpackaged)": {
+      "commandName": "Executable",
+      "executablePath": "$(MSBuildProjectDirectory)\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\EchoBox.App.exe",
+      "workingDirectory": "$(MSBuildProjectDirectory)"
+    },
+    "EchoBox.App (Project)": {
+      "commandName": "Project",
+      "workingDirectory": "$(MSBuildProjectDirectory)"
+    }
+  }
+}

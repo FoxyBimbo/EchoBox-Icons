@@ -1,0 +1,63 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Solution",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/EchoBox-Icons.sln"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build App (WinUI 3)",
+      "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\amd64\\MSBuild.exe",
+      "type": "process",
+      "args": [
+        "${workspaceFolder}/EchoBox.App/EchoBox.App.csproj",
+        "-p:Configuration=Debug",
+        "-v:m"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "Build ShellExtension",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/EchoBox.ShellExtension/EchoBox.ShellExtension.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "Run App",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/EchoBox.App/EchoBox.App.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Clean Solution",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "clean",
+        "${workspaceFolder}/EchoBox-Icons.sln"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
